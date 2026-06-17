@@ -36,7 +36,7 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col">
         <SiteBrand />
-        <div className="flex-1 pt-20 sm:pt-24">{children}</div>
+        <div className="flex-1 pt-24 sm:pt-28">{children}</div>
       </body>
     </html>
   );
