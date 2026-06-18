@@ -72,9 +72,25 @@ async function sendViaTermii(to: string, message: string) {
   }
 }
 
+function normalizeTwilioPhone(phone: string): string {
+  const trimmed = phone.trim();
+  const cleaned = trimmed.replace(/[\s()-]/g, "");
+
+  if (cleaned.startsWith("+")) return cleaned;
+  if (cleaned.startsWith("234") && cleaned.length >= 13) return `+${cleaned}`;
+  if (cleaned.startsWith("0") && cleaned.length >= 11) return `+234${cleaned.slice(1)}`;
+  if (/^\d{10,15}$/.test(cleaned)) return `+${cleaned}`;
+  return cleaned;
+}
+
+function toWhatsAppAddress(phone: string): string {
+  const stripped = phone.replace(/^whatsapp:/i, "");
+  return `whatsapp:${normalizeTwilioPhone(stripped)}`;
+}
+
 async function sendViaTwilio(to: string, message: string) {
   if (!env.twilioAccountSid || !env.twilioAuthToken || !env.twilioWhatsappFrom) {
-    const error = "Twilio WhatsApp environment variables are missing";
+    const error = "Twilio WhatsApp environment variables are missing (TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN, TWILIO_WHATSAPP_FROM)";
     console.error("[WhatsApp:Twilio]", error);
     return { success: false, mode: "twilio" as const, error };
   }
@@ -86,15 +102,17 @@ async function sendViaTwilio(to: string, message: string) {
   }
 
   try {
-    const whatsappNumber = `whatsapp:${to.replace(/^whatsapp:/i, "")}`;
+    // Ensure both From and To are in whatsapp:+E.164 format
+    const fromAddress = toWhatsAppAddress(env.twilioWhatsappFrom);
+    const whatsappNumber = toWhatsAppAddress(to);
 
     const body = new URLSearchParams({
-      From: env.twilioWhatsappFrom,
+      From: fromAddress,
       To: whatsappNumber,
       Body: message,
     });
 
-    console.log("[WhatsApp:Twilio] Sending to:", whatsappNumber);
+    console.log("[WhatsApp:Twilio] Sending:", { from: fromAddress, to: whatsappNumber });
 
     const response = await fetch(
       `https://api.twilio.com/2010-04-01/Accounts/${env.twilioAccountSid}/Messages.json`,
