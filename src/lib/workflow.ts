@@ -478,15 +478,26 @@ async function sendSmsBundle(student: StudentRecord, signedUrl: string, matricNu
     ),
   );
 
+  const skippedRecipients: string[] = [];
+
   for (const result of outcomes) {
     if (result.status === "fulfilled") {
-      if (!result.value.outcome.success) {
-        errors.push(`${result.value.recipient}: ${result.value.outcome.error ?? "SMS failed"}`);
+      const { outcome, recipient } = result.value;
+      if (!outcome.success) {
+        errors.push(`${recipient}: ${outcome.error ?? "SMS failed"}`);
+      } else if (outcome.mode === "skipped") {
+        // Twilio trial account: recipient not verified — nothing was delivered
+        skippedRecipients.push(recipient);
       }
       continue;
     }
 
     errors.push(`unknown: ${result.reason instanceof Error ? result.reason.message : "SMS failed"}`);
+  }
+
+  if (skippedRecipients.length > 0) {
+    const note = `Twilio trial: skipped unverified recipients ${skippedRecipients.join(", ")} — verify at twilio.com/console or upgrade your account`;
+    errors.push(note);
   }
 
   return {
