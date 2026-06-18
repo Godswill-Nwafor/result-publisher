@@ -21,9 +21,8 @@ export default function Home() {
         </h1>
 
         <p className="animate-slide-up anim-d-2 mx-auto mt-6 max-w-2xl text-lg leading-8 text-slate-600">
-          Upload matched PDFs and the system emails, SMSes, and WhatsApps each
-          result to the right student and their parents — all in one publish
-          flow.
+          Upload matched PDFs and the system emails each result to the right
+          student and their parents — all in one publish flow.
         </p>
 
         <div className="animate-slide-up anim-d-3 mt-10 flex flex-wrap items-center justify-center gap-4">
@@ -44,11 +43,9 @@ export default function Home() {
         <div className="animate-slide-up anim-d-4 mt-12 flex flex-wrap items-center justify-center gap-4 text-xs font-medium text-slate-500">
           <ChannelBadge color="bg-blue-500" label="Email delivery" />
           <span className="text-slate-300">·</span>
-          <ChannelBadge color="bg-amber-500" label="SMS alerts" />
-          <span className="text-slate-300">·</span>
-          <ChannelBadge color="bg-green-500" label="WhatsApp" />
-          <span className="text-slate-300">·</span>
           <ChannelBadge color="bg-purple-500" label="Parent notifications" />
+          <span className="text-slate-300">·</span>
+          <ChannelBadge color="bg-emerald-500" label="Instant delivery" />
         </div>
       </section>
 
@@ -56,7 +53,7 @@ export default function Home() {
       <section className="mx-auto max-w-5xl px-4 pb-20 sm:px-6 lg:px-8">
         <div className="animate-scale-in anim-d-5 grid grid-cols-2 overflow-hidden rounded-3xl border border-slate-200 bg-slate-200 shadow-sm lg:grid-cols-4">
           {[
-            { value: "3", label: "Delivery channels" },
+            { value: "Email", label: "Delivery channel" },
             { value: "1-click", label: "Bulk publish" },
             { value: "Auto", label: "PDF matching" },
             { value: "Live", label: "Delivery logs" },
@@ -85,10 +82,10 @@ export default function Home() {
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           <FeatureCard icon={<IconPDF />}    accent="emerald" title="Automatic PDF matching"   text="Name PDFs with a matric number and upload in bulk. The system reads each file, extracts the identifier, and matches it to the right student."                             delayClass="" />
           <FeatureCard icon={<IconEmail />}  accent="blue"    title="Email delivery"            text="Results reach students on their personal email and MTU email simultaneously. Parents receive their copy too."                                                              delayClass="anim-d-1" />
-          <FeatureCard icon={<IconPhone />}  accent="green"   title="SMS & WhatsApp"            text="Instant SMS and WhatsApp alerts with a secure download link. Twilio and Termii adapters both supported."                                                                   delayClass="anim-d-2" />
+          <FeatureCard icon={<IconPhone />}  accent="green"   title="Instant email alerts"      text="Results land in the student's inbox seconds after publishing — no portal login, no waiting, no chasing."                                                                delayClass="anim-d-2" />
           <FeatureCard icon={<IconParent />} accent="purple"  title="Parent included"           text="Parent email and phone are collected at registration and included in every delivery automatically — no extra steps."                                                       delayClass="anim-d-3" />
           <FeatureCard icon={<IconShield />} accent="amber"   title="Secure & auditable"        text="HMAC session tokens, bcrypt passwords, Row-Level Security in Supabase, and full admin activity logs."                                                                      delayClass="anim-d-4" />
-          <FeatureCard icon={<IconChart />}  accent="rose"    title="Live delivery logs"        text="Track email, SMS, and WhatsApp delivery state per student in real time. Retry failed deliveries with one click."                                                           delayClass="anim-d-5" />
+          <FeatureCard icon={<IconChart />}  accent="rose"    title="Live delivery logs"        text="Track email delivery state per student in real time. Failed deliveries surface immediately so you can retry with one click."                                          delayClass="anim-d-5" />
         </div>
       </section>
 
@@ -107,7 +104,7 @@ export default function Home() {
           <div className="absolute left-6 top-10 hidden h-[calc(100%-5rem)] w-px bg-linear-to-b from-emerald-300 via-emerald-200 to-transparent lg:block" />
           <StepCard num={1} title="Students register once"         text="Students submit their matric number, email addresses, phone, and parent contacts via the self-service portal. No admin needed."                                                                  delayClass="anim-d-sm" />
           <StepCard num={2} title="Admin uploads PDFs in bulk"     text="Upload any number of PDF files named by matric number. The system reads each PDF, extracts the matric identifier, and matches it to a student record."                                          delayClass="anim-d-md" />
-          <StepCard num={3} title="Publish — and it reaches everyone" text="One click triggers simultaneous delivery to student email ×2, SMS, WhatsApp, parent email, and parent phone. Delivery state is logged per channel."                                          delayClass="anim-d-lg" />
+          <StepCard num={3} title="Publish — and it reaches everyone" text="One click triggers simultaneous email delivery to the student's personal email, MTU email, and parent email. Delivery state is logged for every send."                               delayClass="anim-d-lg" />
         </div>
       </section>
 

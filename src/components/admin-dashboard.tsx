@@ -386,9 +386,7 @@ export function AdminDashboard({
                         </div>
                       </div>
                       <div className="flex gap-1.5">
-                        <MiniChip label="E" status={log.email_status} />
-                        <MiniChip label="S" status={log.sms_status} />
-                        <MiniChip label="W" status={log.whatsapp_status} />
+                        <MiniChip label="Email" status={log.email_status} />
                       </div>
                     </div>
                   ))}
@@ -533,7 +531,7 @@ export function AdminDashboard({
         <section className="animate-fade-in rounded-3xl border border-slate-200/80 bg-white shadow-sm">
           <div className="flex items-center justify-between border-b border-slate-100 px-6 py-5">
             <div>
-              <p className="text-[11px] font-semibold uppercase tracking-[0.25em] text-slate-400">Channel tracking</p>
+              <p className="text-[11px] font-semibold uppercase tracking-[0.25em] text-slate-400">Email delivery</p>
               <h2 className="mt-0.5 text-lg font-semibold text-slate-900">Delivery Logs</h2>
             </div>
             <span className="rounded-full bg-slate-100 px-3 py-1 text-sm font-semibold text-slate-600">
@@ -555,8 +553,6 @@ export function AdminDashboard({
                     </div>
                     <div className="flex flex-wrap gap-2">
                       <ChannelBadge label="Email" status={log.email_status} />
-                      <ChannelBadge label="SMS" status={log.sms_status} />
-                      <ChannelBadge label="WhatsApp" status={log.whatsapp_status} />
                     </div>
                   </div>
                   {log.error_message && (
