@@ -406,8 +406,8 @@ export function AdminDashboard({
                   </div>
                   <div className="mt-2 h-2 overflow-hidden rounded-full bg-slate-200">
                     <div
-                      className="h-full rounded-full bg-linear-to-r from-emerald-500 to-teal-500 transition-all duration-700"
-                      style={{ width: `${Math.min(100, Math.round((stats.successfulDeliveries / Math.max(stats.resultCount, 1)) * 100))}%` }}
+                      className="progress-fill h-full rounded-full bg-linear-to-r from-emerald-500 to-teal-500 transition-all duration-700"
+                      style={{ "--fill-w": `${Math.min(100, Math.round((stats.successfulDeliveries / Math.max(stats.resultCount, 1)) * 100))}%` } as React.CSSProperties}
                     />
                   </div>
                 </div>

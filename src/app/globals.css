@@ -170,6 +170,9 @@ body::before {
   animation: shimmer 4s linear infinite;
 }
 
+/* Dynamic progress bar — width driven by --fill-w CSS variable */
+.progress-fill { width: var(--fill-w, 0%); }
+
 /* Card hover lift */
 .card-hover {
   transition: transform 0.25s cubic-bezier(0.16,1,0.3,1),
